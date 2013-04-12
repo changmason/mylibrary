@@ -6,8 +6,12 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(params[:book])
-    @book.save
-    render :text => 'Book was successfully created.'
+
+    if @book.save
+      redirect_to @book, notice: 'Book was successfully created.'
+    else
+      render :action => "new"
+    end
   end
 
   def index
@@ -24,8 +28,12 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    @book.update_attributes(params[:book])
-    render :text => 'Book was successfully updated.'
+
+    if @book.update_attributes(params[:book])
+      redirect_to @book, notice: 'Book was successfully updated.'
+    else
+      render :action => "edit"
+    end
   end
 
   def destroy
