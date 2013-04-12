@@ -4,6 +4,8 @@ Mylibrary::Application.routes.draw do
   match 'books/create' => 'books#create'
   match 'books/index' => 'books#index'
   match 'books/show/:id' => 'books#show'
+  match 'books/edit/:id' => 'books#edit'
+  match 'books/update/:id' => 'books#update'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

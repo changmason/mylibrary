@@ -1,0 +1,21 @@
+%h2 Edit Book
+
+= form_for @book, :url => "/books/update/#{@book.id}" do |f|
+
+  = f.label :author
+  = f.text_field :author
+  %br
+
+  = f.label :title
+  = f.text_field :title
+  %br
+
+  = f.label :description
+  = f.text_area :description
+  %br
+
+  = f.label :publish_date
+  = f.date_select :publish_date
+  %br
+
+  = f.submit 'Save'

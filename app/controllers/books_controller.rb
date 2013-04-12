@@ -18,4 +18,14 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
+  def edit
+    @book = Book.find(params[:id])
+  end
+
+  def update
+    @book = Book.find(params[:id])
+    @book.update_attributes(params[:book])
+    render :text => 'Book was successfully updated.'
+  end
+
 end
