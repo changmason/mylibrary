@@ -1,5 +1,7 @@
 Mylibrary::Application.routes.draw do
 
+  resources :categories
+
   resources :books
 
   # get 'books/new' => 'books#new'
