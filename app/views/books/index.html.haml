@@ -3,6 +3,7 @@
 %table{:class => 'books'}
   %tbody
     %tr
+      %th Category
       %th Author
       %th Title
       %th Description
@@ -10,6 +11,7 @@
 
     - @books.each do |book|
       %tr{:id => "book_#{book.id}"}
+        %td= book.category.name
         %td= book.author
         %td= book.title
         %td= book.description
