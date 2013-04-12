@@ -40,7 +40,7 @@ describe 'Books' do
   context 'index' do
     it 'should display the books table with correct header and content' do
       book = Book.create(book_attrs)
-      visit "/books/index"
+      visit "/books"
 
       within('table.books tr:first-child') do
         page.should have_css('th', :text => 'Author')
@@ -54,9 +54,9 @@ describe 'Books' do
         page.should have_css("td", :text => book.title)
         page.should have_css("td", :text => book.description)
         page.should have_css("td", :text => book.publish_date.to_s)
-        page.should have_link('Show', :href => "/books/show/#{book.id}")
-        page.should have_link('Edit', :href => "/books/edit/#{book.id}")
-        page.should have_link('Destroy', :href => "/books/destroy/#{book.id}")
+        page.should have_link('Show', :href => "/books/#{book.id}")
+        page.should have_link('Edit', :href => "/books/#{book.id}/edit")
+        page.should have_link('Destroy', :href => "/books/#{book.id}")
       end
     end
   end
@@ -64,7 +64,7 @@ describe 'Books' do
   context 'show' do
     it 'should show the specified book' do
       book = Book.create(book_attrs)
-      visit "/books/show/#{book.id}"
+      visit "/books/#{book.id}"
 
       page.should have_content(book.author)
       page.should have_content(book.title)
@@ -76,7 +76,7 @@ describe 'Books' do
   context 'edit' do
     it 'should update the specified book' do
       book = Book.create(book_attrs)
-      visit "/books/edit/#{book.id}"
+      visit "/books/#{book.id}/edit"
 
       fill_in 'Author',      :with => 'Mason Chang'
       fill_in 'Title',       :with => 'Reading Really Slow'
@@ -90,7 +90,7 @@ describe 'Books' do
   context 'destroy' do
     it 'should destroy the specified book' do
       book = Book.create(book_attrs)
-      visit "/books/index"
+      visit "/books"
 
       within("table.books tr#book_#{book.id}") do
         click_on 'Destroy'

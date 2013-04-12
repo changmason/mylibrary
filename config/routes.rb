@@ -1,12 +1,14 @@
 Mylibrary::Application.routes.draw do
 
-  match 'books/new' => 'books#new'
-  match 'books/create' => 'books#create'
-  match 'books/index' => 'books#index'
-  match 'books/show/:id' => 'books#show'
-  match 'books/edit/:id' => 'books#edit'
-  match 'books/update/:id' => 'books#update'
-  match 'books/destroy/:id' => 'books#destroy'
+  resources :books
+
+  # get 'books/new' => 'books#new'
+  # post 'books' => 'books#create'
+  # get 'books' => 'books#index'
+  # get 'books/:id' => 'books#show'
+  # get 'books/:id/edit' => 'books#edit'
+  # put 'books/:id' => 'books#update'
+  # delete 'books/:id' => 'books#destroy'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
