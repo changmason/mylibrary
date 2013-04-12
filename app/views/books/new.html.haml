@@ -1,6 +1,6 @@
 %h2 New Book
 
-= form_for @book, :url => '/books' do |f|
+= form_for @book do |f|
 
   = f.label :author
   = f.text_field :author

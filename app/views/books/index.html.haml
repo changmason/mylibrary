@@ -15,6 +15,6 @@
         %td= book.description
         %td= book.publish_date
         %td
-          = link_to 'Show', "/books/#{book.id}"
-          = link_to 'Edit', "/books/#{book.id}/edit"
-          = link_to 'Destroy', "/books/#{book.id}", :method => 'delete'
+          = link_to 'Show', book_path(book)
+          = link_to 'Edit', edit_book_path(book)
+          = link_to 'Destroy', book_path(book), :method => 'delete'

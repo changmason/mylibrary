@@ -23,7 +23,7 @@ describe 'Books' do
 
   context 'new' do
     it 'should create a book' do
-      visit "/books/new"
+      visit new_book_path
 
       fill_in 'Author',      :with => book_attrs[:author]
       fill_in 'Title',       :with => book_attrs[:title]
@@ -40,7 +40,7 @@ describe 'Books' do
   context 'index' do
     it 'should display the books table with correct header and content' do
       book = Book.create(book_attrs)
-      visit "/books"
+      visit books_path
 
       within('table.books tr:first-child') do
         page.should have_css('th', :text => 'Author')
@@ -54,9 +54,9 @@ describe 'Books' do
         page.should have_css("td", :text => book.title)
         page.should have_css("td", :text => book.description)
         page.should have_css("td", :text => book.publish_date.to_s)
-        page.should have_link('Show', :href => "/books/#{book.id}")
-        page.should have_link('Edit', :href => "/books/#{book.id}/edit")
-        page.should have_link('Destroy', :href => "/books/#{book.id}")
+        page.should have_link('Show', :href => book_path(book))
+        page.should have_link('Edit', :href => edit_book_path(book))
+        page.should have_link('Destroy', :href => book_path(book))
       end
     end
   end
@@ -64,7 +64,7 @@ describe 'Books' do
   context 'show' do
     it 'should show the specified book' do
       book = Book.create(book_attrs)
-      visit "/books/#{book.id}"
+      visit book_path(book)
 
       page.should have_content(book.author)
       page.should have_content(book.title)
@@ -76,7 +76,7 @@ describe 'Books' do
   context 'edit' do
     it 'should update the specified book' do
       book = Book.create(book_attrs)
-      visit "/books/#{book.id}/edit"
+      visit edit_book_path(book)
 
       fill_in 'Author',      :with => 'Mason Chang'
       fill_in 'Title',       :with => 'Reading Really Slow'
@@ -90,7 +90,7 @@ describe 'Books' do
   context 'destroy' do
     it 'should destroy the specified book' do
       book = Book.create(book_attrs)
-      visit "/books"
+      visit books_path
 
       within("table.books tr#book_#{book.id}") do
         click_on 'Destroy'
