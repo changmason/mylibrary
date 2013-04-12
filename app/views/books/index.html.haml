@@ -1,0 +1,20 @@
+%h2 Books
+
+%table{:class => 'books'}
+  %tbody
+    %tr
+      %th Author
+      %th Title
+      %th Description
+      %th Publish date
+
+    - @books.each do |book|
+      %tr{:id => "book_#{book.id}"}
+        %td= book.author
+        %td= book.title
+        %td= book.description
+        %td= book.publish_date
+        %td
+          = link_to 'Show', "/books/show/#{book.id}"
+          = link_to 'Edit', "/books/edit/#{book.id}"
+          = link_to 'Destroy', "/books/destroy/#{book.id}"

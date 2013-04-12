@@ -10,4 +10,8 @@ class BooksController < ApplicationController
     render :text => 'Book was successfully created.'
   end
 
+  def index
+    @books = Book.all
+  end
+
 end
