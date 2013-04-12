@@ -1,23 +1,29 @@
 = form_for @book do |f|
+  - if @book.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@book.errors.count, "error")} prohibited this category from being saved:"
+      %ul
+        - @book.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :category
+    = f.collection_select :category_id, Category.all, :id, :name
 
-  = f.label :category
-  = f.collection_select :category_id, Category.all, :id, :name
-  %br
+  .field
+    = f.label :author
+    = f.text_field :author
 
-  = f.label :author
-  = f.text_field :author
-  %br
+  .field
+    = f.label :title
+    = f.text_field :title
 
-  = f.label :title
-  = f.text_field :title
-  %br
+  .field
+    = f.label :description
+    = f.text_area :description
 
-  = f.label :description
-  = f.text_area :description
-  %br
+  .field
+    = f.label :publish_date
+    = f.date_select :publish_date
 
-  = f.label :publish_date
-  = f.date_select :publish_date
-  %br
-
-  = f.submit 'Save'
+  .actions
+    = f.submit 'Save'

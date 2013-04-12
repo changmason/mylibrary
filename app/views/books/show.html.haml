@@ -1,16 +1,23 @@
-%h2 Show Book
+%p
+  %b Category:
+  = @book.category.name
 
-%b Category
-%p= @book.category.name
+%p
+  %b Author:
+  = @book.author
 
-%b Author
-%p= @book.author
+%p
+  %b Title:
+  = @book.title
 
-%b Title
-%p= @book.title
+%p
+  %b Description:
+  = @book.description
 
-%b Description
-%p= @book.description
+%p
+  %b Publish date:
+  = @book.publish_date
 
-%b Publish date
-%p= @book.publish_date
+= link_to 'Edit', edit_book_path(@book)
+\|
+= link_to 'Back', books_path
