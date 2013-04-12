@@ -5,7 +5,9 @@ describe 'Books' do
   include Capybara::DSL
 
   before do
+    Category.destroy_all
     Book.destroy_all
+    @category = Category.create(:name => 'Psychology')
     # Capybara.current_driver = :selenium
   end
 
@@ -25,6 +27,7 @@ describe 'Books' do
     it 'should create a book' do
       visit new_book_path
 
+      select @category.name, :from => 'book[category_id]'
       fill_in 'Author',      :with => book_attrs[:author]
       fill_in 'Title',       :with => book_attrs[:title]
       fill_in 'Description', :with => book_attrs[:description]
@@ -39,7 +42,7 @@ describe 'Books' do
 
   context 'index' do
     it 'should display the books table with correct header and content' do
-      book = Book.create(book_attrs)
+      book = Book.create(book_attrs.merge(:category_id => @category.id))
       visit books_path
 
       within('table.books tr:first-child') do
@@ -63,7 +66,7 @@ describe 'Books' do
 
   context 'show' do
     it 'should show the specified book' do
-      book = Book.create(book_attrs)
+      book = Book.create(book_attrs.merge(:category_id => @category.id))
       visit book_path(book)
 
       page.should have_content(book.author)
@@ -75,7 +78,7 @@ describe 'Books' do
 
   context 'edit' do
     it 'should update the specified book' do
-      book = Book.create(book_attrs)
+      book = Book.create(book_attrs.merge(:category_id => @category.id))
       visit edit_book_path(book)
 
       fill_in 'Author',      :with => 'Mason Chang'
@@ -89,7 +92,7 @@ describe 'Books' do
 
   context 'destroy' do
     it 'should destroy the specified book' do
-      book = Book.create(book_attrs)
+      book = Book.create(book_attrs.merge(:category_id => @category.id))
       visit books_path
 
       within("table.books tr#book_#{book.id}") do
